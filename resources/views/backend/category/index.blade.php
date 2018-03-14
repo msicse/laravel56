@@ -1,5 +1,5 @@
 @extends('layouts.backend')
-@section('title','Sliders')
+@section('title','Categories')
 
 @push('styles')
 	<link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap.min.css">
@@ -18,38 +18,34 @@
             	
                 <div class="col-md-12">
 					<div class="col-md-2">
-						<a href="{{ route('slider.create') }}" class="btn btn-primary btn-block">Add Slider<div class="ripple-container"></div></a>
+						<a href="{{ route('categories.create') }}" class="btn btn-primary btn-block">Add Category<div class="ripple-container"></div></a>
 					</div>
                     <div class="card">
                         <div class="card-header" data-background-color="purple">
-                            <h4 class="title">Slider Table</h4>
+                            <h4 class="title">Categories Table</h4>
                             <p class="category"></p>
                         </div>
                         <div class="card-content table-responsive">
                             <table class="table" id="example">
                                 <thead class="text-primary">
                                     <th>ID</th>
-                                    <th>Title</th>
-                                    <th>Sub-Title</th>
-                                    <th>Image</th>
-                                    <th>Created At</th>
-                                    <th>Updated At</th>
+                                    <th>Name</th>
+                                    <th>Slug</th>
                                     <th> Action </th>
                                 </thead>
                                 <tbody>
-                                	@foreach( $sliders as $key => $data )
+                                	@foreach( $categories as $key => $data )
                                     <tr>
                                         <td>{{ $key + 1 }}</td>
-                                        <td>{{ $data->title }}</td>
-                                        <td>{{ $data->sub_title }}</td>
-                                        <td> <img class="img-responsive" src="{{ asset('uploads/slider')}}/{{$data->image}}"/> </td>
-                                        <td class="text-primary">{{ $data->created_at }}</td>
-                                        <td class="text-primary">{{ $data->updated_at }}</td>
+                                        <td>{{ $data->name }}</td>
+                                        <td>{{ $data->slug }}</td>
+                                        
+                                        
                                         <td>
-                                        	<a href="{{ route('slider.edit',$data->id) }}" class="btn btn-primary btn-sm" "><i class="material-icons">mode_edit</i></a>
+                                        	<a href="{{ route('categories.edit',$data->id) }}" class="btn btn-primary btn-sm" "><i class="material-icons">mode_edit</i></a>
                                         	
 
-                                        	<form id="delete-form-{{ $data->id }}" style="display: none;" action="{{  route('slider.destroy',$data->id) }}" method="post">
+                                        	<form id="delete-form-{{ $data->id }}" style="display: none;" action="{{  route('categories.destroy',$data->id) }}" method="post">
                                         		@csrf
                                         		@method('DELETE')
 

@@ -23,6 +23,20 @@ Tip 2: you can also add an image using data-image tag
                     <p>Slider</p>
                 </a>
             </li>
+
+            <li class="{{ (\Request::route()->getName() == 'categories.index') ? 'active' : '' }}">
+                <a href="{{ route('categories.index') }}">
+                    <i class="material-icons">content_paste</i>
+                    <p>Categories</p>
+                </a>
+            </li>
+            <li class="{{ (\Request::route()->getName() == 'items.index') ? 'active' : '' }}">
+                <a href="{{ route('items.index') }}">
+                    <i class="material-icons">content_paste</i>
+                    <p>Items</p>
+                </a>
+            </li>
+
             <li>
                 <a href="./table.html">
                     <i class="material-icons">content_paste</i>

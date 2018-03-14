@@ -102,7 +102,8 @@ class SliderController extends Controller
      */
     public function edit($id)
     {
-        //
+        $data = Slider::find($id);
+        return view('backend.slider.edit')->withData($data);
     }
 
     /**
@@ -114,7 +115,47 @@ class SliderController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        
+        $slider = Slider::find($id);
+
+        $this->validate($request, array(
+            'title' => 'required|max:255',
+            'sub-title' => 'required',
+            'image' => 'mimes:jpeg,bmp,png,gif',
+        ));
+        /*
+        if($request->hasFile('image')) {
+
+            $image = $request->file('fetured_image');
+            $filename = time() . '.'. $image->getClientOriginalExtension();
+            $location = public_path('images/'.$filename);
+            Image::make($image)->resize(800,400)->save($location);
+            $post->image = $filename;
+        }
+        */
+        $image = $request->file('image');
+        $slug = str_slug($request->title);
+
+        if (isset($image)) {
+            $currentDate = Carbon::now()->toDateString();
+            $imagename = $slug .'-'.$currentDate.uniqid().'.'.$image->getClientOriginalExtension();
+
+            if (!file_exists('uploads/slider')) {
+                mkdir('uploads/slider', 0777, true);
+            }
+            $image->move('uploads/slider',$imagename);
+        } else{
+            $imagename = $slider->image;
+        }
+
+        
+
+        $slider->title      = $request->input('title');
+        $slider->sub_title  = $request->input('sub-title');
+        $slider->image      = $imagename;
+        $slider->save();
+
+        return redirect()->route('slider.index')->with('success','Slider Successfully Updated');
     }
 
     /**
@@ -125,6 +166,12 @@ class SliderController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $data = Slider::find($id);
+        if(file_exists('uploads/slider/'.$data->image)){
+            unlink('uploads/slider/'.$data->image);
+        }
+
+        $data->delete();
+        return redirect()->back()->with('success','Slider Successfully Deleted');
     }
 }

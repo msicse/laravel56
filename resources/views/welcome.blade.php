@@ -17,6 +17,17 @@
         <link rel="stylesheet" href="{{ asset('frontend/css/pricing.css')}}">
         <link rel="stylesheet" href="{{ asset('frontend/css/main.css')}}">
 
+        <style>
+            @foreach($sliders as $key => $data)
+            .owl-carousel .owl-wrapper, .owl-carousel .owl-item:nth-child({{ $key + 1}}) .item
+            {
+                background: url('{{ asset('uploads/slider/'.$data->image)  }}');
+                background-size: cover;
+                background-position: bottom;
+            }
+            @endforeach
+        </style>
+
 
         <script src="{{ asset('frontend/js/jquery-1.11.2.min.js')}}"></script>
         <script type="text/javascript" src="{{ asset('frontend/js/jquery.flexslider.min.js')}}"></script>
@@ -27,29 +38,6 @@
                  controlsContainer: ".flexslider-container"
                 });
             });
-        </script>
-
-        <script src="https://maps.googleapis.com/maps/api/js"></script>
-        <script>
-            function initialize() {
-                var mapCanvas = document.getElementById('map-canvas');
-                var mapOptions = {
-                    center: new google.maps.LatLng(24.909439, 91.833800),
-                    zoom: 16,
-                    scrollwheel: false,
-                    mapTypeId: google.maps.MapTypeId.ROADMAP
-                }
-                var map = new google.maps.Map(mapCanvas, mapOptions)
-
-                var marker = new google.maps.Marker({
-                    position: new google.maps.LatLng(24.909439, 91.833800),
-                    title:"Mamma's Kitchen Restaurant"
-                });
-
-                // To add the marker to the map, call setMap();
-                marker.setMap(map);
-            }
-            google.maps.event.addDomListener(window, 'load', initialize);
         </script>
 
 
@@ -90,30 +78,18 @@
 
         <!--== 5. Header ==-->
         <section id="header-slider" class="owl-carousel">
+            
+            @foreach($sliders as $key => $data)
             <div class="item">
                 <div class="container">
                     <div class="header-content">
-                        <h1 class="header-title">BEST FOOD</h1>
-                        <p class="header-sub-title">create your own slogan</p>
+                        <h1 class="header-title">{{ $data->title }}</h1>
+                        <p class="header-sub-title"> {{ $data->sub_title }} </p>
                     </div> <!-- /.header-content -->
                 </div>
             </div>
-            <div class="item">
-                <div class="container">
-                    <div class="header-content">
-                        <h1 class="header-title">BEST SNACKS</h1>
-                        <p class="header-sub-title">create your own slogan</p>
-                    </div> <!-- /.header-content -->
-                </div>
-            </div>
-            <div class="item">
-                <div class="container">
-                    <div class="header-content text-right pull-right">
-                        <h1 class="header-title">BEST DRINKS</h1>
-                        <p class="header-sub-title">create your own slogan</p>
-                    </div> <!-- /.header-content -->
-                </div>
-            </div>
+            @endforeach
+            
         </section>
 
 
