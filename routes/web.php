@@ -12,6 +12,7 @@
 */
 
 Route::get('/', 'HomeController@index')->name('home');
+Route::post('reserved', 'ReserveController@postReserved')->name('reserved');
 
 Auth::routes();
 

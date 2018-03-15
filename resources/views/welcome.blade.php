@@ -16,6 +16,7 @@
         <link rel="stylesheet" href="{{ asset('frontend/css/flexslider.css')}}">
         <link rel="stylesheet" href="{{ asset('frontend/css/pricing.css')}}">
         <link rel="stylesheet" href="{{ asset('frontend/css/main.css')}}">
+        <link rel="stylesheet" href="{{ asset('frontend/css/bootstrap-datetimepicker.min.css')}}">
 
         <style>
             @foreach($sliders as $key => $data)
@@ -638,7 +639,8 @@
                     <div class=" section-content">
                         <div class="row">
                             <div class="col-md-5 col-sm-6">
-                                <form class="reservation-form" method="post" action="reserve.php">
+                                <form class="reservation-form" method="post" action="{{ route('reserved') }}">
+                                    @csrf
                                     <div class="row">
                                         <div class="col-md-6 col-sm-6">
                                             <div class="form-group">
@@ -654,7 +656,7 @@
                                                 <input type="tel" class="form-control reserve-form empty iconified" name="phone" id="phone" required="required" placeholder="  &#xf095;  Phone">
                                             </div>
                                             <div class="form-group">
-                                                <input type="text" class="form-control reserve-form empty iconified" name="datepicker" id="datepicker" required="required" placeholder="&#xf017;  Time">
+                                                <input type="text" class="form-control reserve-form empty iconified" name="datepicker" id="datetimepicker1" required="required" placeholder="&#xf017;  Time">
                                             </div>
                                         </div>
 
@@ -799,6 +801,21 @@
         <script type="text/javascript" src="{{ asset('frontend/js/jquery.hoverdir.js')}}"></script>
         <script type="text/javascript" src="{{ asset('frontend/js/jQuery.scrollSpeed.js')}}"></script>
         <script src="{{ asset('frontend/js/script.js')}}"></script>
+        <script src="{{ asset('frontend/js/bootstrap-datetimepicker.min.js')}}"></script>
+        <script src="http://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
+        
+        <script>
+            $(function ()  {
+                $('#datetimepicker1').datetimepicker({
+
+                    format: "dd-MM-yyyy  HH:ii P ",
+                    showMeridian: true,
+                    autoclose: true,
+                    todayBtn: true
+
+                });
+            })
+        </script>
         
 
     </body>
