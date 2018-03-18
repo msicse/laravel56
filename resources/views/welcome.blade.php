@@ -17,6 +17,8 @@
         <link rel="stylesheet" href="{{ asset('frontend/css/pricing.css')}}">
         <link rel="stylesheet" href="{{ asset('frontend/css/main.css')}}">
         <link rel="stylesheet" href="{{ asset('frontend/css/bootstrap-datetimepicker.min.css')}}">
+        <link rel="stylesheet" href="{{ asset('frontend/css/toster.min.css')}}">
+       <!--  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css"> -->
 
         <style>
             @foreach($sliders as $key => $data)
@@ -816,6 +818,15 @@
                 });
             })
         </script>
+
+        @if ($errors->any())
+            @foreach ($errors->all() as $error)
+                <script>
+                    toastr.error('{{ $error }}');
+                </script>
+            @endforeach
+        @endif
+        {!! Toastr::message() !!}
         
 
     </body>

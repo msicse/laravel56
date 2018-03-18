@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Reservation;
+use Toastr;
 
 class ReserveController extends Controller
 {
@@ -27,6 +28,8 @@ class ReserveController extends Controller
     	$data->message 		= $request->input('message');
     	$data->status 		= false;
     	$data->save();
-    	return redirect()->back()->with('success','Successfully Send Message for Reservation');
+        
+        Toastr::success('Successfully send reservation please wait for confirmation', 'Title', ["positionClass" => "toast-top-right"]);
+    	return redirect()->back();
     }
 }
