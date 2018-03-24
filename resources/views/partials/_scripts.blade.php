@@ -16,6 +16,7 @@
 <script src="{{ asset('backend/js/material-dashboard.js?v=1.2.0') }}"></script>
 <!-- Material Dashboard DEMO methods, don't include it in your project! -->
 <script src="{{ asset('backend/js/demo.js') }}"></script>
+<script src="http://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
 <script type="text/javascript">
     $(document).ready(function() {
 
@@ -24,5 +25,13 @@
 
     });
 </script>
+    @if ($errors->any())
+        @foreach ($errors->all() as $error)
+            <script>
+                toastr.error('{{ $error }}');
+            </script>
+        @endforeach
+    @endif
+        {!! Toastr::message() !!}
 
 @stack('scripts')

@@ -1,4 +1,4 @@
-<div class="sidebar" data-color="purple" data-image="../assets/img/sidebar-1.jpg">
+<div class="sidebar" data-color="purple" data-image="{{ asset('backend/img/sidebar-1.jpg')}}">
     <!--
 Tip 1: You can change the color of the sidebar using: data-color="purple | blue | green | orange | red"
 
@@ -23,6 +23,12 @@ Tip 2: you can also add an image using data-image tag
                     <p>Slider</p>
                 </a>
             </li>
+            <li class="{{ (\Request::route()->getName() == 'reservation.index') ? 'active' : '' }}">
+                <a href="{{ route('reservation.index') }}">
+                    <i class="material-icons">chrome_reader_mode</i>
+                    <p>Reservation</p>
+                </a>
+            </li>
 
             <li class="{{ (\Request::route()->getName() == 'categories.index') ? 'active' : '' }}">
                 <a href="{{ route('categories.index') }}">
@@ -37,18 +43,13 @@ Tip 2: you can also add an image using data-image tag
                 </a>
             </li>
 
-            <li>
-                <a href="./table.html">
+            <li class="{{ (\Request::route()->getName() == 'contacts.index') ? 'active' : '' }}">
+                <a href="{{ route('contacts.index') }}">
                     <i class="material-icons">content_paste</i>
-                    <p>Table List</p>
+                    <p>Contacts</p>
                 </a>
             </li>
-            <li>
-                <a href="./typography.html">
-                    <i class="material-icons">library_books</i>
-                    <p>Typography</p>
-                </a>
-            </li>
+
             <li>
                 <a href="./icons.html">
                     <i class="material-icons">bubble_chart</i>
